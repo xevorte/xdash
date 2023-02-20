@@ -213,6 +213,7 @@ export default function Page() {
         <COMPONENT.Pagination
           items={products}
           setPagedItems={setPagedProducts}
+          filter={filter}
         />
       </div>
     </COMPONENT.Layout>
