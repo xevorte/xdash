@@ -12,7 +12,9 @@ export default function Page() {
   const [products, setProducts] = useState([]);
   const [pagedProducts, setPagedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState({
+    search: '',
+  });
   const [productsToggle, setProductsToggle] = useState(true);
 
   const { query } = useRouter();
@@ -35,14 +37,14 @@ export default function Page() {
       setCartDetail(response?.data);
       setProducts(
         response?.data?.products?.filter((product: any) =>
-          product.title.toLowerCase().includes(search.toLowerCase())
+          product.title.toLowerCase().includes(filter.search.toLowerCase())
         )
       );
       getUserDetailAction(response?.data?.userId);
     } else {
       console.log(response);
     }
-  }, [search]);
+  }, [filter.search]);
 
   useEffect(() => {
     if (query.id) {
@@ -56,10 +58,12 @@ export default function Page() {
       <COMPONENT.Header label={`Cart ${cartDetail.id}`} loading={loading}>
         <COMPONENT.InputText
           id="search"
-          value={search}
+          value={filter.search}
           placeholder="Search..."
           leftIcon={fas.faSearch}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) =>
+            setFilter((prev: any) => ({ ...prev, search: e.target.value }))
+          }
         />
       </COMPONENT.Header>
       <div className="mt-8 mb-12">
@@ -319,6 +323,7 @@ export default function Page() {
         <COMPONENT.Pagination
           items={products}
           setPagedItems={setPagedProducts}
+          filter={filter}
         />
       </div>
     </COMPONENT.Layout>
