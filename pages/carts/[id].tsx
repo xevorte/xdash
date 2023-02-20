@@ -13,6 +13,7 @@ export default function Page() {
   const [pagedProducts, setPagedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [productsToggle, setProductsToggle] = useState(true);
 
   const { query } = useRouter();
 
@@ -54,15 +55,15 @@ export default function Page() {
     <COMPONENT.Layout>
       <COMPONENT.Header label={`Cart ${cartDetail.id}`} loading={loading}>
         <COMPONENT.InputText
-          id='search'
+          id="search"
           value={search}
-          placeholder='Search...'
+          placeholder="Search..."
           leftIcon={fas.faSearch}
           onChange={(e) => setSearch(e.target.value)}
         />
       </COMPONENT.Header>
-      <div className='mt-8 mb-12'>
-        <h2 className='w-fit bg-indigo-500 font-semibold text-lg text-white px-16 py-3 cursor-pointer rounded-t-lg'>
+      <div className="mt-8 mb-12">
+        <h2 className="w-fit bg-indigo-500 font-semibold text-lg text-white px-16 py-3 cursor-pointer rounded-t-lg">
           Detail
         </h2>
         <div
@@ -73,72 +74,180 @@ export default function Page() {
               : 'bg-white'
           )}
         >
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>ID :</p>
-            <p className={clsx('font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer', !loading ? 'bg-indigo-500 text-white' : 'text-slate-300')}>
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              ID :
+            </p>
+            <p
+              className={clsx(
+                'font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer',
+                !loading ? 'bg-indigo-500 text-white' : 'text-slate-300'
+              )}
+            >
               {cartDetail?.id}
             </p>
           </div>
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>Total Amount :</p>
-            <p className={clsx('font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer', !loading ? 'bg-indigo-500 text-white' : 'text-slate-300')}>
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              Total Amount :
+            </p>
+            <p
+              className={clsx(
+                'font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer',
+                !loading ? 'bg-indigo-500 text-white' : 'text-slate-300'
+              )}
+            >
               {cartDetail?.total}
             </p>
           </div>
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>Total Products :</p>
-            <p className={clsx('font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer', !loading ? 'bg-indigo-500 text-white' : 'text-slate-300')}>
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              Total Products :
+            </p>
+            <p
+              className={clsx(
+                'font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer',
+                !loading ? 'bg-indigo-500 text-white' : 'text-slate-300'
+              )}
+            >
               {cartDetail?.totalProducts}
             </p>
           </div>
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>Total Quantity :</p>
-            <p className={clsx('font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer', !loading ? 'bg-indigo-500 text-white' : 'text-slate-300')}>
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              Total Quantity :
+            </p>
+            <p
+              className={clsx(
+                'font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer',
+                !loading ? 'bg-indigo-500 text-white' : 'text-slate-300'
+              )}
+            >
               {cartDetail?.totalQuantity}
             </p>
           </div>
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>User Avatar :</p>
-            <Image src={user?.image || '/assets/images/empty.jpg'} width={100} height={100} alt='avatar' className='mb-2 rounded-lg' />
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              User Avatar :
+            </p>
+            <Image
+              src={user?.image || '/assets/images/empty.jpg'}
+              width={100}
+              height={100}
+              alt="avatar"
+              className="mb-2 rounded-lg"
+            />
           </div>
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>User Name :</p>
-            <p className={clsx('font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer', !loading ? 'bg-indigo-500 text-white' : 'text-slate-300')}>
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              User Name :
+            </p>
+            <p
+              className={clsx(
+                'font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer',
+                !loading ? 'bg-indigo-500 text-white' : 'text-slate-300'
+              )}
+            >
               {user?.firstName + ' ' + user?.lastName}
             </p>
           </div>
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>User Age :</p>
-            <p className={clsx('font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer', !loading ? 'bg-indigo-500 text-white' : 'text-slate-300')}>
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              User Age :
+            </p>
+            <p
+              className={clsx(
+                'font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer',
+                !loading ? 'bg-indigo-500 text-white' : 'text-slate-300'
+              )}
+            >
               {user?.age}
             </p>
           </div>
-          <div className='flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8'>
-            <p className={clsx('font-medium mb-2', !loading ? 'text-indigo-500' : 'bg-slate-300')}>User Address :</p>
-            <p className={clsx('font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer', !loading ? 'bg-indigo-500 text-white' : 'text-slate-300')}>
+          <div className="flex items-center justify-between flex-wrap border border-neutral-100 pb-6 p-8">
+            <p
+              className={clsx(
+                'font-medium mb-2',
+                !loading ? 'text-indigo-500' : 'bg-slate-300'
+              )}
+            >
+              User Address :
+            </p>
+            <p
+              className={clsx(
+                'font-semibold px-2 py-1 mb-2 rounded-md cursor-pointer',
+                !loading ? 'bg-indigo-500 text-white' : 'text-slate-300'
+              )}
+            >
               {user?.address?.address + ', ' + user?.address?.city}
             </p>
           </div>
         </div>
       </div>
-      <div className='w-full lg:min-w-full lg:w-0 rounded-lg overflow-x-auto pb-8'>
-        <table className='w-full table-auto bg-white rounded-xl overflow-hidden'>
+      <div
+        className="w-full bg-teal-500 text-white text-lg text-center font-semibold py-4 rounded-t-xl transition-all cursor-pointer hover:bg-teal-600"
+        onClick={() => setProductsToggle(!productsToggle)}
+      >
+        Products
+      </div>
+      <div
+        className={clsx(
+          'w-full lg:min-w-full lg:w-0 overflow-x-auto overflow-y-hidden transition-all',
+          productsToggle ? 'h-auto pb-9' : 'h-0'
+        )}
+      >
+        <table className="w-full table-auto bg-white rounded-b-xl overflow-hidden">
           <thead>
-            <tr className='bg-indigo-500'>
-              <th className='text-white text-start px-8 pt-[26px] pb-6'>ID</th>
-              <th className='text-white text-start px-8 pt-[26px] pb-6'>
+            <tr className="bg-indigo-500">
+              <th className="text-white text-start px-8 pt-[26px] pb-6">ID</th>
+              <th className="text-white text-start px-8 pt-[26px] pb-6">
                 Title
               </th>
-              <th className='text-white text-start px-8 pt-[26px] pb-6'>
+              <th className="text-white text-start px-8 pt-[26px] pb-6">
                 Quantity
               </th>
-              <th className='text-white text-start px-8 pt-[26px] pb-6'>
+              <th className="text-white text-start px-8 pt-[26px] pb-6">
                 Total
               </th>
-              <th className='text-white text-start px-8 pt-[26px] pb-6'>
+              <th className="text-white text-start px-8 pt-[26px] pb-6">
                 Discount
               </th>
-              <th className='text-white text-start px-8 pt-[26px] pb-6'>
+              <th className="text-white text-start px-8 pt-[26px] pb-6">
                 Price
               </th>
             </tr>
@@ -147,23 +256,23 @@ export default function Page() {
             {!loading ? (
               pagedProducts.length > 0 ? (
                 pagedProducts.map((product: any, id: number) => (
-                  <tr key={id} className='border-t border-b'>
-                    <td className='font-medium p-8'>{product?.id}</td>
-                    <td className='font-medium p-8'>{product?.title}</td>
-                    <td className='font-medium p-8'>{product?.quantity} PCS</td>
-                    <td className='font-medium p-8'>{product?.total}</td>
-                    <td className='font-medium p-8'>
+                  <tr key={id} className="border-t border-b">
+                    <td className="font-medium p-8">{product?.id}</td>
+                    <td className="font-medium p-8">{product?.title}</td>
+                    <td className="font-medium p-8">{product?.quantity} PCS</td>
+                    <td className="font-medium p-8">{product?.total}</td>
+                    <td className="font-medium p-8">
                       ${product?.discountedPrice} ({product?.discountPercentage}
                       %)
                     </td>
-                    <td className='font-medium p-8'>$ {product?.price}</td>
+                    <td className="font-medium p-8">$ {product?.price}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
                   <td
                     colSpan={9}
-                    className='text-xl text-rose-500 text-center font-bold px-2 py-6'
+                    className="text-xl text-rose-500 text-center font-bold px-2 py-6"
                   >
                     No Data
                   </td>
@@ -171,34 +280,34 @@ export default function Page() {
               )
             ) : (
               [...Array(4)].map((el, id) => (
-                <tr key={id} className='animate-pulse border-t border-b'>
-                  <td className='font-medium p-8'>
-                    <div className='bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg'>
+                <tr key={id} className="animate-pulse border-t border-b">
+                  <td className="font-medium p-8">
+                    <div className="bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg">
                       0
                     </div>
                   </td>
-                  <td className='font-medium p-8'>
-                    <div className='bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg'>
+                  <td className="font-medium p-8">
+                    <div className="bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg">
                       title
                     </div>
                   </td>
-                  <td className='font-medium p-8'>
-                    <div className='bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg'>
+                  <td className="font-medium p-8">
+                    <div className="bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg">
                       quantity
                     </div>
                   </td>
-                  <td className='font-medium p-8'>
-                    <div className='bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg'>
+                  <td className="font-medium p-8">
+                    <div className="bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg">
                       total
                     </div>
                   </td>
-                  <td className='font-medium p-8'>
-                    <div className='bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg'>
+                  <td className="font-medium p-8">
+                    <div className="bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg">
                       discount
                     </div>
                   </td>
-                  <td className='font-medium p-8'>
-                    <div className='bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg'>
+                  <td className="font-medium p-8">
+                    <div className="bg-slate-300 text-slate-300 p-4 cursor-wait select-none rounded-lg">
                       $ 999
                     </div>
                   </td>
