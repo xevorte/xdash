@@ -30,7 +30,7 @@ export default function Page() {
     <COMPONENT.Layout>
       <COMPONENT.Header label='Carts' />
       <div className='w-full lg:min-w-full lg:w-0 rounded-lg overflow-x-auto pb-8 mt-12'>
-        <table className='w-full table-fixed bg-white text-center rounded-xl overflow-hidden'>
+        <table className='w-full sm:table-fixed bg-white text-center rounded-xl overflow-hidden'>
           <thead>
             <tr className='bg-indigo-500'>
               <th className='text-white px-8 pt-[26px] pb-6'>ID</th>
